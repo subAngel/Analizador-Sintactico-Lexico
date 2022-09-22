@@ -23,6 +23,7 @@ public enum Tokens {
     Llave_a,
     Llave_c,
     Main,
+    Void,
     P_coma,
     Identificador,
     Numero,

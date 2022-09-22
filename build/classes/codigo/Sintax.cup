@@ -17,7 +17,7 @@ parser code
 
 terminal Linea, Comillas, Int, Char, If, Else, While, Igual, Suma, 
     Resta, Multiplicacion, Division, Parentesis_a, Parentesis_c, Llave_a,
-    Llave_c, Main, P_coma, Identificador, Numero, ERROR;
+    Llave_c, Main, Void, P_coma, Identificador, Numero, ERROR;
 
 non terminal INICIO, SENTENCIA
 ;
@@ -36,7 +36,14 @@ INICIO ::=
     Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
     Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c 
 ;
 SENTENCIA ::= 
     Char Identificador P_coma |

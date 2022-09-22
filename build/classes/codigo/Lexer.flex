@@ -30,6 +30,7 @@ espacio=[ ,\t,\r]+
 ( "{" ) {lexeme=yytext(); return Llave_a;}
 ( "}" ) {lexeme=yytext(); return Llave_c;}
 ( "main" ) {lexeme=yytext(); return Main;}
+( "void" ) {lexeme=yytext(); return Void;}
 ( ";" ) {lexeme=yytext(); return P_coma;}
 {L}({L}|{D})* {lexeme=yytext(); return Identificador;}
 ("(-"{D}+")")|{D}+ {lexeme=yytext(); return Numero;}

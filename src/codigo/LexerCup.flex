@@ -38,6 +38,7 @@ espacio=[ ,\t,\r,\n]+
 ( "{" ) {return new Symbol(sym.Llave_a, yychar, yyline, yytext());}
 ( "}" ) {return new Symbol(sym.Llave_c, yychar, yyline, yytext());}
 ( "main" ) {return new Symbol(sym.Main, yychar, yyline, yytext());}
+( "void" ) {return new Symbol(sym.Void, yychar, yyline, yytext());}
 ( ";" ) {return new Symbol(sym.P_coma, yychar, yyline, yytext());}
 {L}({L}|{D})* {return new Symbol(sym.Identificador, yychar, yyline, yytext());}
 ("(-"{D}+")")|{D}+ {return new Symbol(sym.Numero, yychar, yyline, yytext());}

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package codigo;
 
 import java.awt.Color;
@@ -94,7 +91,10 @@ public class Ventana extends javax.swing.JFrame {
                     resultado += " <llave c>\t\t"+ lexer.lexeme + "\n";
                     break;
                 case Main:
-                    resultado += " <main>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <main>\t\t\t"+ lexer.lexeme + "\n";
+                    break;
+                case Void: 
+                    resultado += " <void>\t\t\t" + lexer.lexeme + "\n";
                     break;
                 case P_coma:
                     resultado += " <punto y coma>\t\t"+ lexer.lexeme + "\n";
