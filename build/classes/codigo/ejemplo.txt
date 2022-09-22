@@ -1,8 +1,6 @@
 int main () {
     int n1 = 3;
     int n2;
-    n1 = 4;
-    
+    char l2;
     char l1 = "b";
-    hola = "b";
 }
