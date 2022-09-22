@@ -1,6 +1,10 @@
 int main () {
     int n1 = 3;
+    char l1 = "b";
+
     int n2;
     char l2;
-    char l1 = "b";
+
+    hola = "h";
+    dos = 2;
 }

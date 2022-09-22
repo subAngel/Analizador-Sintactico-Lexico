@@ -30,6 +30,8 @@ INICIO ::=
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
     Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
     Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
