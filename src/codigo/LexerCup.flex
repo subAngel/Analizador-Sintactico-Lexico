@@ -23,6 +23,7 @@ espacio=[ ,\t,\r,\n]+
 {espacio} {/*Ignore*/}
 ( "//"(.)* ) {/*Ignore*/}
 ( "\"" ) {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
+( "'" ) {return new Symbol(sym.Comilla, yychar, yyline, yytext());}
 ( int ) {return new Symbol(sym.Int, yychar, yyline, yytext());}
 ( char ) {return new Symbol(sym.Char, yychar, yyline, yytext());}
 ( if ) {return new Symbol(sym.If, yychar, yyline, yytext());}

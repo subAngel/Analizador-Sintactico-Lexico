@@ -8,6 +8,7 @@ package codigo;
 public enum Tokens {
     Linea,
     Comillas,
+    Comilla,
     Int,
     Char,
     If,

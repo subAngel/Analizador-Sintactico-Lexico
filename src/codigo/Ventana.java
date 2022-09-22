@@ -48,6 +48,9 @@ public class Ventana extends javax.swing.JFrame {
                 case Comillas:
                     resultado += " <comillas>\t\t" + lexer.lexeme + "\n";
                     break;
+                case Comilla:
+                    resultado += " <comilla sim>\t\t" + lexer.lexeme + "\n";
+                    break;
                 case Int:
                     resultado += " <reservada int>\t\t" + lexer.lexeme + "\n";
                     break;

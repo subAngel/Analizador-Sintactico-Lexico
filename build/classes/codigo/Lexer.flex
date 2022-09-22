@@ -15,6 +15,7 @@ espacio=[ ,\t,\r]+
 ( "//"(.)* ) {/*Ignore*/}
 ( "\n" ) {return Linea;}
 ( "\"" ) {lexeme=yytext(); return Comillas;}
+( "'" ) {lexeme=yytext(); return Comilla;}
 ( int ) {lexeme=yytext(); return Int;}
 ( char ) {lexeme=yytext(); return Char;}
 ( if ) {lexeme=yytext(); return If;}
