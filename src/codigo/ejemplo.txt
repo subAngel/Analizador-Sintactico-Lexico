@@ -4,6 +4,5 @@ int main () {
     n1 = 4;
     
     char l1 = "b";
-    char h = "";
     hola = "b";
 }
