@@ -24,7 +24,7 @@ espacio=[ ,\t,\r,\n]+
 ( "//"(.)* ) {/*Ignore*/}
 ( "\"" ) {return new Symbol(sym.Comillas, yychar, yyline, yytext());}
 ( int ) {return new Symbol(sym.Int, yychar, yyline, yytext());}
-( char ) {return new Symbol(sym.Character, yychar, yyline, yytext());}
+( char ) {return new Symbol(sym.Char, yychar, yyline, yytext());}
 ( if ) {return new Symbol(sym.If, yychar, yyline, yytext());}
 ( else ) {return new Symbol(sym.Else, yychar, yyline, yytext());}
 ( while ) {return new Symbol(sym.While, yychar, yyline, yytext());}

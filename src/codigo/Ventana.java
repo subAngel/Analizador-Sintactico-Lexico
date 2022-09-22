@@ -50,10 +50,13 @@ public class Ventana extends javax.swing.JFrame {
                     break;
                 case Comillas:
                     resultado += " <comillas>\t\t" + lexer.lexeme + "\n";
+                    break;
                 case Int:
                     resultado += " <reservada int>\t\t" + lexer.lexeme + "\n";
                     break;
-                
+                case Char:
+                    resultado += " <reservada char\t\t" + lexer.lexeme + "\n";
+                    break;
                 case If:
                     resultado += " <reservada if>\t\t" + lexer.lexeme + "\n";
                     break;

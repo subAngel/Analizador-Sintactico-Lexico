@@ -16,7 +16,7 @@ espacio=[ ,\t,\r]+
 ( "\n" ) {return Linea;}
 ( "\"" ) {lexeme=yytext(); return Comillas;}
 ( int ) {lexeme=yytext(); return Int;}
-( char ) {lexeme=yytext(); return Character;}
+( char ) {lexeme=yytext(); return Char;}
 ( if ) {lexeme=yytext(); return If;}
 ( else ) {lexeme=yytext(); return Else;}
 ( while ) {lexeme=yytext(); return While;}

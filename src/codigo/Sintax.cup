@@ -15,7 +15,7 @@ parser code
 }
 :};
 
-terminal Linea, Comillas, Int, Character, If, Else, While, Igual, Suma, 
+terminal Linea, Comillas, Int, Char, If, Else, While, Igual, Suma, 
     Resta, Multiplicacion, Division, Parentesis_a, Parentesis_c, Llave_a,
     Llave_c, Main, P_coma, Identificador, Numero, ERROR;
 
@@ -26,14 +26,23 @@ start with INICIO;
 
 INICIO ::= 
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c
+    Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
+    Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c
 ;
 SENTENCIA ::= 
+    Char Identificador P_coma |
+    Char Identificador Igual Comillas Comillas P_coma |
+    Char Identificador Igual Comillas Identificador Comillas P_coma |
     Int Identificador P_coma |
     Int Identificador Igual Numero P_coma |
-    Character Identificador P_coma |
-    Character Identificador Igual Comillas Comillas P_coma |
-    Character Identificador Igual Comillas Identificador P_coma |
+    Char Identificador Igual Comillas Identificador P_coma |
     Identificador Igual Numero P_coma |
     Identificador Igual Comillas Identificador Comillas P_coma
 ;

@@ -9,7 +9,7 @@ public enum Tokens {
     Linea,
     Comillas,
     Int,
-    Character,
+    Char,
     If,
     Else,
     While,
