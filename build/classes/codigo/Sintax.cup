@@ -65,7 +65,8 @@ INICIO ::=
 SENTENCIA ::= 
     Char Identificador P_coma |
     Char Identificador Igual Comilla Comilla P_coma |
-    Char Identificador Igual Comilla Identificador Comilla P_coma |
+    Char Identificador:i2 Igual Comilla Identificador:e2 {: RESULT = i2.toString(); ta = new TablaSimbolos(); 
+    ta.crearEntrada(i2.toString(), "CHAR"); ta.setValor(i2.toString(), e2.toString()); ta.Imprimir();  :} Comilla P_coma |
     Int Identificador P_coma |
     Int Identificador:i1 Igual Numero:e1 {: RESULT= i1.toString(); ta= new TablaSimbolos(); 
     ta.crearEntrada(i1.toString(), "VARIABLE"); ta.setValor(i1.toString(),e1.toString()); ta.Imprimir();  :} P_coma |

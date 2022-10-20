@@ -8,7 +8,8 @@ public class objeto {
     String tipo;
 
     public String toString() {
-        return nombre + " " + valor + " " + tipo;
+//        return String.format("|\t%s\t\t|\t\t%s\t\t|\t\t%s\t\t|", nombre, valor, tipo);
+        return "|   " + nombre + "        |       " + valor + "       |      " + tipo + "       |";
     }
 
     public objeto(String pnombre, String ptipo) {
