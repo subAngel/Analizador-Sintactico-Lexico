@@ -11,6 +11,8 @@ public enum Tokens {
     Comilla,
     Int,
     Char,
+    Float, 
+    Punto,
     If,
     Else,
     While,

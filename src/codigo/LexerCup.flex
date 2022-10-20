@@ -26,6 +26,8 @@ espacio=[ ,\t,\r,\n]+
 ( "'" ) {return new Symbol(sym.Comilla, yychar, yyline, yytext());}
 ( int ) {return new Symbol(sym.Int, yychar, yyline, yytext());}
 ( char ) {return new Symbol(sym.Char, yychar, yyline, yytext());}
+( float ) {return new Symbol(sym.Float, yychar, yyline, yytext());}
+( "." ) {return new Symbol(sym.Punto, yychar, yyline, yytext());}
 ( if ) {return new Symbol(sym.If, yychar, yyline, yytext());}
 ( else ) {return new Symbol(sym.Else, yychar, yyline, yytext());}
 ( while ) {return new Symbol(sym.While, yychar, yyline, yytext());}
