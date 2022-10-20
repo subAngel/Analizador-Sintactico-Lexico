@@ -2,8 +2,20 @@ package codigo;
 
 import java_cup.runtime.Symbol;
 
+action code{:
+    TablaSimbolos ta = new TablaSimbolos();     
+
+    int valido=1;
+:}
+
 parser code
 {:
+
+    public static void main(String args[]) throws Exception{          
+        parser r = new parser();
+        new parser(new LexerCup(new FileInputStream(args[0]))).parse();     
+        System.out.println("Parseo finalizado");
+    }
     private Symbol s;
     
     public void syntax_error(Symbol s){
@@ -14,6 +26,7 @@ parser code
         return this.s;
 }
 :};
+
 
 terminal Linea, Comillas, Comilla, Int, Char, Float, Punto, If, Else, While, Igual, Suma, 
     Resta, Multiplicacion, Division, Parentesis_a, Parentesis_c, Llave_a,
