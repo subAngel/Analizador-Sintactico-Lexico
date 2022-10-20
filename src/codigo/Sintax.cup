@@ -1,9 +1,23 @@
 package codigo;
 
 import java_cup.runtime.Symbol;
+import java_cup.runtime.*;
+import java_cup.parser;
+import java.io.*;
+import java.io.Reader;
+
+action code{:
+    TablaSimbolos ta = new TablaSimbolos();
+    int valido = 1;
+:}
 
 parser code
 {:
+    public static void main(String args[]) throws Exception{          
+        parser r = new parser();
+        new parser(new LexerCup(new FileInputStream(args[0]))).parse();     
+        System.out.println("Parseo finalizado");
+    }
     private Symbol s;
     
     public void syntax_error(Symbol s){
@@ -12,45 +26,44 @@ parser code
 
     public Symbol getS(){
         return this.s;
-}
+    }
 :};
 
-terminal Linea, Comillas, Comilla, Int, Char, If, Else, While, Igual, Suma, 
+terminal Linea, Comillas, Comilla, Int, Char, Double, Punto, If, Else, While, Igual, Suma, 
     Resta, Multiplicacion, Division, Parentesis_a, Parentesis_c, Llave_a,
     Llave_c, Main, Void, P_coma, Identificador, Numero, ERROR;
 
-non terminal INICIO, SENTENCIA
+non terminal INICIO, SENTENCIA, DECLARACION
 ;
 
 start with INICIO;
 
 INICIO ::= 
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
+    Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
+    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
     Int Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c |
-    Void Main Parentesis_a Parentesis_c Llave_a SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA SENTENCIA Llave_c 
 ;
 SENTENCIA ::= 
+    SENTENCIA DECLARACION |
+    DECLARACION |
+;
+    
+DECLARACION ::=
     Char Identificador P_coma |
     Char Identificador Igual Comilla Comilla P_coma |
     Char Identificador Igual Comilla Identificador Comilla P_coma |
     Int Identificador P_coma |
-    Int Identificador Igual Numero P_coma |
+    Int Identificador:i1 Igual Numero:e1 {: RESULT= i1.toString(); ta= new TablaSimbolos(); 
+    ta.crearEntrada(i1.toString(), "VARIABLE"); ta.setValor(i1.toString(),e1.toString()); ta.Imprimir();
+            :} P_coma |
+    Double Identificador P_coma | 
+    Double Identificador Igual Numero Punto Numero P_coma |
     Identificador Igual Numero P_coma |
     Identificador Igual Comilla Identificador Comilla P_coma
 ;
