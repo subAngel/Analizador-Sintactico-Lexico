@@ -3,6 +3,7 @@ package codigo;
 
 import java.util.Vector;
 import codigo.objeto;
+import javax.swing.JOptionPane;
 
 public class TablaSimbolos {
 
@@ -56,9 +57,12 @@ public class TablaSimbolos {
     }
 
     public static void Imprimir() {
+        String salida = "";
         for (int i = 0; i < tabla.size(); i++) {
+            salida += tabla.elementAt(i).toString() + "\n";
             System.out.println(tabla.elementAt(i).toString());
         }
+        JOptionPane.showMessageDialog(null, salida, "Tabla de simbolos", -1);
     }
 
     public static void setValor(String pnombre, String pval) {
