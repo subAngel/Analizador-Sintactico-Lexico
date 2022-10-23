@@ -73,5 +73,14 @@ SENTENCIA ::=
     Identificador Igual Numero P_coma |
     Identificador Igual Comilla Identificador Comilla P_coma |
     Float Identificador P_coma | 
-    Float Identificador Igual Numero Punto Numero P_coma 
+    Float Identificador:i3 Igual Numero:n1 Punto Numero:n2 {:
+        RESULT=i3.toString(); 
+        ta = new TablaSimbolos();
+        ta.crearEntrada(i3.toString(), "FLOAT");
+        String numero = n1.toString();
+        String decimal = n2.toString();
+        String valor = numero + "." + decimal;
+        ta.setValor(i3.toString(),valor);
+        ta.Imprimir();
+    :} P_coma 
 ;
