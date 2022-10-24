@@ -1,4 +1,3 @@
-
 package codigo;
 
 import java.awt.BorderLayout;
@@ -19,7 +18,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-
 public class Ventana extends javax.swing.JFrame {
 
     /**
@@ -30,24 +28,24 @@ public class Ventana extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        
+
     }
-    
+
     // analizar lexico
-    private void analizarLexico() throws IOException{
+    private void analizarLexico() throws IOException {
         int cont = 1;
-        
+
         String exp = (String) txt_file.getText();
         Lexer lexer = new Lexer(new StringReader(exp));
         String resultado = "LINEA " + cont + "\t\t\tSIMBOLO\n";
-        while (true){
+        while (true) {
             Tokens token = lexer.yylex();
-            if(token == null){
+            if (token == null) {
                 txt_lex.setText(resultado);
                 return;
             }
-            
-            switch(token){
+
+            switch (token) {
                 case Linea:
                     cont++;
                     resultado += "LINEA " + cont + "\n";
@@ -74,46 +72,46 @@ public class Ventana extends javax.swing.JFrame {
                     resultado += " <reservada while>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Igual:
-                    resultado += " <igual>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <igual>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Suma:
-                    resultado += " <suma>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <suma>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Resta:
-                    resultado += " <resta>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <resta>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Multiplicacion:
-                    resultado += " <multiplicacion>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <multiplicacion>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Division:
-                    resultado += " <division>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <division>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Parentesis_a:
-                    resultado += " <parentesis a>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <parentesis a>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Parentesis_c:
-                    resultado += " <parentesis c>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <parentesis c>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Llave_a:
-                    resultado += " <llave a>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <llave a>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Llave_c:
-                    resultado += " <llave c>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <llave c>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Main:
-                    resultado += " <main>\t\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <main>\t\t\t" + lexer.lexeme + "\n";
                     break;
-                case Void: 
+                case Void:
                     resultado += " <void>\t\t\t" + lexer.lexeme + "\n";
                     break;
                 case P_coma:
-                    resultado += " <punto y coma>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <punto y coma>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Identificador:
-                    resultado += " <identificador>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <identificador>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Numero:
-                    resultado += " <numero>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <numero>\t\t" + lexer.lexeme + "\n";
                     break;
                 case ERROR:
                     resultado += " <NO definido>\t\t\n";
@@ -357,13 +355,13 @@ public class Ventana extends javax.swing.JFrame {
         JFileChooser ch = new JFileChooser("./src/codigo/");
         ch.showOpenDialog(null);
         File file = new File(ch.getSelectedFile().getAbsolutePath());
-        
+
         try {
             String ST = new String(Files.readAllBytes(file.toPath()));
             txt_file.setText(ST);
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_btn_abrirActionPerformed
 
     private void btn_analizarLexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_analizarLexActionPerformed
@@ -406,16 +404,20 @@ public class Ventana extends javax.swing.JFrame {
         TablaSimbolos tabla = new TablaSimbolos();
         Vector tablaS = tabla.getTabla();
         Object elementos[][] = tabla.devolverElementos();
-        String[] columnNames = new String[]{"Nombre", "Valor", "Tipo"};
+        try {
+            String[] columnNames = new String[]{"Nombre", "Valor", "Tipo"};
 //        tabla_sim.setModel(null);
-        DefaultTableModel dtm = new DefaultTableModel(); 
-        dtm.setColumnIdentifiers(columnNames);
-        tabla_sim.setModel(dtm);
-        for (int i = 0; i < tablaS.size(); i++) {
-            dtm.addRow(elementos[i]);
+            DefaultTableModel dtm = new DefaultTableModel();
+            dtm.setColumnIdentifiers(columnNames);
+            tabla_sim.setModel(dtm);
+            for (int i = 0; i < tablaS.size(); i++) {
+                dtm.addRow(elementos[i]);
+            }
+        } catch (Exception e) {
+            System.err.println("HA OCURRIDO UN ERROR ");
         }
-        
-        
+
+
     }//GEN-LAST:event_ver_tabla_simActionPerformed
 
     /**
