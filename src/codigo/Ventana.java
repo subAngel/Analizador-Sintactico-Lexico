@@ -407,8 +407,8 @@ public class Ventana extends javax.swing.JFrame {
         Vector tablaS = tabla.getTabla();
         Object elementos[][] = tabla.devolverElementos();
         String[] columnNames = new String[]{"Nombre", "Valor", "Tipo"};
-        
-        DefaultTableModel dtm = new DefaultTableModel();
+//        tabla_sim.setModel(null);
+        DefaultTableModel dtm = new DefaultTableModel(); 
         dtm.setColumnIdentifiers(columnNames);
         tabla_sim.setModel(dtm);
         for (int i = 0; i < tablaS.size(); i++) {
