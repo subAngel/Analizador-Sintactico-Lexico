@@ -92,5 +92,13 @@ SENTENCIA ::=
                     String valor = numero + "." + decimal;
                     ta.setValor(i3.toString(),valor);
                     // ta.Imprimir();
-                    :} P_coma 
+                    :} P_coma |
+    Int Identificador Igual Numero Suma Numero P_coma |
+    Int Identificador Igual Numero Resta Numero P_coma |
+    Int Identificador Igual Numero Multiplicacion Numero P_coma |
+    Int Identificador Igual Numero Division Numero P_coma |
+    Identificador Igual Numero Suma Numero P_coma |
+    Identificador Igual Numero Resta Numero P_coma |
+    Identificador Igual Numero Multiplicacion Numero P_coma |
+    Identificador Igual Numero Division Numero P_coma 
 ;
