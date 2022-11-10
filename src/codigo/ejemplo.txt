@@ -1,10 +1,6 @@
 int main () {
-    int n1 = 3;
-    char l1 = "b";
-
-    int n2;
-    char l2;
-
-    hola = "h";
-    dos = 2;
+    int n1 = 4;
+    int n1 = 8;
+    char c = 'c';
+    float pi = 3.14;
 }

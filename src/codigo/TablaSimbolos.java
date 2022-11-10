@@ -1,8 +1,8 @@
-
 package codigo;
 
 import java.util.Vector;
 import codigo.objeto;
+import java.lang.reflect.Array;
 import javax.swing.JOptionPane;
 
 public class TablaSimbolos {
@@ -12,13 +12,18 @@ public class TablaSimbolos {
     public TablaSimbolos() {
     }
 
-    public static void crearEntrada(String nombre, String tipo) {
-        String subStr;
+    public static String crearEntrada(String nombre, String tipo) {
+        String salida;
         objeto e = TablaSimbolos.busca(nombre);
         if (e == null) {
             e = new objeto(nombre, tipo);
             tabla.add(e);
+            return salida = "Elemento creado correctamente";
         } else {
+            if (!e.getTipo().equals(tipo)) {
+                return salida = e.getTipo() + " no puede ser de " + tipo;
+            }
+            return salida = "El objeto ya existe";
         }
     }
 
@@ -52,17 +57,37 @@ public class TablaSimbolos {
         return e;
     }
 
+    public static Object[][] devolverElementos() {
+        try {
+            Object[][] arreglo = new Object[3][3];
+            for (int i = 0; i < tabla.size(); i++) {
+                objeto obj = (objeto) tabla.elementAt(i);
+                arreglo[i][0] = obj.getNombre();
+                arreglo[i][1] = obj.getValor();
+                arreglo[i][2] = obj.getTipo();
+            }
+            return arreglo;
+        } catch (Exception e) {
+            System.err.println("HA OCURRIDO UN ERROR AL DEVOLVER LOS ELEMENTOS");
+            return null;
+        }
+
+    }
+
     public static Vector getTabla() {
         return tabla;
     }
 
     public static void Imprimir() {
-        String salida = "";
+//        String salida = "";
+//        for (int i = 0; i < tabla.size(); i++) {
+//            salida += tabla.elementAt(i).toString() + "\n";
+//            System.out.println(tabla.elementAt(i).toString());
+//        }
+//        JOptionPane.showMessageDialog(null, salida, "Tabla de simbolos", -1);
         for (int i = 0; i < tabla.size(); i++) {
-            salida += tabla.elementAt(i).toString() + "\n";
             System.out.println(tabla.elementAt(i).toString());
         }
-        JOptionPane.showMessageDialog(null, salida, "Tabla de simbolos", -1);
     }
 
     public static void setValor(String pnombre, String pval) {

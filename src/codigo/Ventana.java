@@ -1,17 +1,22 @@
-
 package codigo;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.nio.file.Files;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java_cup.runtime.Symbol;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Ventana extends javax.swing.JFrame {
 
@@ -23,24 +28,24 @@ public class Ventana extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
-        
+
     }
-    
+
     // analizar lexico
-    private void analizarLexico() throws IOException{
+    private void analizarLexico() throws IOException {
         int cont = 1;
-        
+
         String exp = (String) txt_file.getText();
         Lexer lexer = new Lexer(new StringReader(exp));
         String resultado = "LINEA " + cont + "\t\t\tSIMBOLO\n";
-        while (true){
+        while (true) {
             Tokens token = lexer.yylex();
-            if(token == null){
+            if (token == null) {
                 txt_lex.setText(resultado);
                 return;
             }
-            
-            switch(token){
+
+            switch (token) {
                 case Linea:
                     cont++;
                     resultado += "LINEA " + cont + "\n";
@@ -67,46 +72,46 @@ public class Ventana extends javax.swing.JFrame {
                     resultado += " <reservada while>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Igual:
-                    resultado += " <igual>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <igual>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Suma:
-                    resultado += " <suma>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <suma>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Resta:
-                    resultado += " <resta>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <resta>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Multiplicacion:
-                    resultado += " <multiplicacion>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <multiplicacion>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Division:
-                    resultado += " <division>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <division>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Parentesis_a:
-                    resultado += " <parentesis a>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <parentesis a>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Parentesis_c:
-                    resultado += " <parentesis c>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <parentesis c>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Llave_a:
-                    resultado += " <llave a>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <llave a>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Llave_c:
-                    resultado += " <llave c>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <llave c>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Main:
-                    resultado += " <main>\t\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <main>\t\t\t" + lexer.lexeme + "\n";
                     break;
-                case Void: 
+                case Void:
                     resultado += " <void>\t\t\t" + lexer.lexeme + "\n";
                     break;
                 case P_coma:
-                    resultado += " <punto y coma>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <punto y coma>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Identificador:
-                    resultado += " <identificador>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <identificador>\t\t" + lexer.lexeme + "\n";
                     break;
                 case Numero:
-                    resultado += " <numero>\t\t"+ lexer.lexeme + "\n";
+                    resultado += " <numero>\t\t" + lexer.lexeme + "\n";
                     break;
                 case ERROR:
                     resultado += " <NO definido>\t\t\n";
@@ -141,6 +146,10 @@ public class Ventana extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         txt_sintactico = new javax.swing.JTextArea();
         btn_limpiarSin = new javax.swing.JButton();
+        panel_tabla = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabla_sim = new javax.swing.JTable();
+        ver_tabla_sim = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -189,15 +198,17 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(panel_lexicoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panel_lexicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panel_lexicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panel_lexicoLayout.createSequentialGroup()
+                        .addComponent(btn_abrir, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addGap(18, 18, 18)
+                .addGroup(panel_lexicoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_lexicoLayout.createSequentialGroup()
                         .addComponent(btn_analizarLex)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btn_limpiarLex))
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         panel_lexicoLayout.setVerticalGroup(
@@ -247,7 +258,7 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(panel_sintacticoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(btn_analizarSin)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                 .addComponent(btn_limpiarSin)
                 .addContainerGap())
             .addComponent(jScrollPane3)
@@ -260,9 +271,33 @@ public class Ventana extends javax.swing.JFrame {
                     .addComponent(btn_analizarSin)
                     .addComponent(btn_limpiarSin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
         );
+
+        panel_tabla.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        tabla_sim.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane4.setViewportView(tabla_sim);
+
+        panel_tabla.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 390, 180));
+
+        ver_tabla_sim.setFont(new java.awt.Font("JetBrainsMono NF", 1, 14)); // NOI18N
+        ver_tabla_sim.setText("Ver tabla de simbolos");
+        ver_tabla_sim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ver_tabla_simActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -270,9 +305,18 @@ public class Ventana extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(panel_sintactico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panel_lexico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel_lexico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(panel_sintactico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel_tabla, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ver_tabla_sim, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(21, 21, 21)))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -280,8 +324,15 @@ public class Ventana extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(panel_lexico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panel_sintactico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panel_sintactico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(ver_tabla_sim)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(panel_tabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -293,7 +344,7 @@ public class Ventana extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -304,13 +355,13 @@ public class Ventana extends javax.swing.JFrame {
         JFileChooser ch = new JFileChooser("./src/codigo/");
         ch.showOpenDialog(null);
         File file = new File(ch.getSelectedFile().getAbsolutePath());
-        
+
         try {
             String ST = new String(Files.readAllBytes(file.toPath()));
             txt_file.setText(ST);
         } catch (Exception e) {
         }
-        
+
     }//GEN-LAST:event_btn_abrirActionPerformed
 
     private void btn_analizarLexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_analizarLexActionPerformed
@@ -347,6 +398,27 @@ public class Ventana extends javax.swing.JFrame {
         // TODO add your handling code here:
         txt_lex.setText(null);
     }//GEN-LAST:event_btn_limpiarLexActionPerformed
+
+    private void ver_tabla_simActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ver_tabla_simActionPerformed
+        // TODO add your handling code here:
+        TablaSimbolos tabla = new TablaSimbolos();
+        Vector tablaS = tabla.getTabla();
+        Object elementos[][] = tabla.devolverElementos();
+        try {
+            String[] columnNames = new String[]{"Nombre", "Valor", "Tipo"};
+//        tabla_sim.setModel(null);
+            DefaultTableModel dtm = new DefaultTableModel();
+            dtm.setColumnIdentifiers(columnNames);
+            tabla_sim.setModel(dtm);
+            for (int i = 0; i < tablaS.size(); i++) {
+                dtm.addRow(elementos[i]);
+            }
+        } catch (Exception e) {
+            System.err.println("HA OCURRIDO UN ERROR ");
+        }
+
+
+    }//GEN-LAST:event_ver_tabla_simActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,10 +466,14 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JPanel panel_lexico;
     private javax.swing.JPanel panel_sintactico;
+    private javax.swing.JPanel panel_tabla;
+    private javax.swing.JTable tabla_sim;
     private javax.swing.JTextArea txt_file;
     private javax.swing.JTextArea txt_lex;
     private javax.swing.JTextArea txt_sintactico;
+    private javax.swing.JButton ver_tabla_sim;
     // End of variables declaration//GEN-END:variables
 }

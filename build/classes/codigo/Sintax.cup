@@ -65,22 +65,49 @@ INICIO ::=
 SENTENCIA ::= 
     Char Identificador P_coma |
     Char Identificador Igual Comilla Comilla P_coma |
-    Char Identificador:i2 Igual Comilla Identificador:e2 {: RESULT = i2.toString(); ta = new TablaSimbolos(); 
-    ta.crearEntrada(i2.toString(), "CHAR"); ta.setValor(i2.toString(), e2.toString()); ta.Imprimir();  :} Comilla P_coma |
+    Char Identificador:i2 Igual Comilla Identificador:e2 {: 
+                    RESULT = i2.toString(); 
+                    ta = new TablaSimbolos(); 
+                    ta.crearEntrada(i2.toString(), "CHAR"); 
+                    ta.setValor(i2.toString(), e2.toString()); 
+                    // ta.Imprimir();  
+                    :} Comilla P_coma |
     Int Identificador P_coma |
-    Int Identificador:i1 Igual Numero:e1 {: RESULT= i1.toString(); ta= new TablaSimbolos(); 
-    ta.crearEntrada(i1.toString(), "INTEGER"); ta.setValor(i1.toString(),e1.toString()); ta.Imprimir();  :} P_coma |
+    Int Identificador:i1 Igual Numero:e1 {: 
+                    RESULT= i1.toString(); 
+                    ta= new TablaSimbolos(); 
+                    ta.crearEntrada(i1.toString(), "INTEGER"); 
+                    ta.setValor(i1.toString(),e1.toString()); 
+                    // ta.Imprimir();  
+                    :} P_coma |
     Identificador Igual Numero P_coma |
     Identificador Igual Comilla Identificador Comilla P_coma |
     Float Identificador P_coma | 
     Float Identificador:i3 Igual Numero:n1 Punto Numero:n2 {:
-        RESULT=i3.toString(); 
-        ta = new TablaSimbolos();
-        ta.crearEntrada(i3.toString(), "FLOAT");
-        String numero = n1.toString();
-        String decimal = n2.toString();
-        String valor = numero + "." + decimal;
-        ta.setValor(i3.toString(),valor);
-        ta.Imprimir();
-    :} P_coma 
+                    RESULT=i3.toString(); 
+                    ta = new TablaSimbolos();
+                    ta.crearEntrada(i3.toString(), "FLOAT");
+                    String numero = n1.toString();
+                    String decimal = n2.toString();
+                    String valor = numero + "." + decimal;
+                    ta.setValor(i3.toString(),valor);
+                    // ta.Imprimir();
+                    :} P_coma |
+    Int Identificador Igual Numero Suma Numero P_coma |
+    Int Identificador Igual Numero Resta Numero P_coma |
+    Int Identificador Igual Numero Multiplicacion Numero P_coma |
+    Int Identificador Igual Numero Division Numero P_coma |
+    Int Identificador Igual Identificador Suma Identificador P_coma |
+    Int Identificador Igual Identificador Resta Identificador P_coma |
+    Int Identificador Igual Identificador Multiplicacion Identificador P_coma |
+    Int Identificador Igual Identificador Division Identificador P_coma |
+    Identificador Igual Numero Suma Numero P_coma |
+    Identificador Igual Numero Resta Numero P_coma |
+    Identificador Igual Numero Multiplicacion Numero P_coma |
+    Identificador Igual Numero Division Numero P_coma |
+    Identificador Igual Identificador Suma Identificador P_coma |
+    Identificador Igual Identificador Resta Identificador P_coma |
+    Identificador Igual Identificador Multiplicacion Identificador P_coma |
+    Identificador Igual Identificador Division Identificador P_coma 
+
 ;
