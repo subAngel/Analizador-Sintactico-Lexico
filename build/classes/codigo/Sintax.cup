@@ -97,8 +97,17 @@ SENTENCIA ::=
     Int Identificador Igual Numero Resta Numero P_coma |
     Int Identificador Igual Numero Multiplicacion Numero P_coma |
     Int Identificador Igual Numero Division Numero P_coma |
+    Int Identificador Igual Identificador Suma Identificador P_coma |
+    Int Identificador Igual Identificador Resta Identificador P_coma |
+    Int Identificador Igual Identificador Multiplicacion Identificador P_coma |
+    Int Identificador Igual Identificador Division Identificador P_coma |
     Identificador Igual Numero Suma Numero P_coma |
     Identificador Igual Numero Resta Numero P_coma |
     Identificador Igual Numero Multiplicacion Numero P_coma |
-    Identificador Igual Numero Division Numero P_coma 
+    Identificador Igual Numero Division Numero P_coma |
+    Identificador Igual Identificador Suma Identificador P_coma |
+    Identificador Igual Identificador Resta Identificador P_coma |
+    Identificador Igual Identificador Multiplicacion Identificador P_coma |
+    Identificador Igual Identificador Division Identificador P_coma 
+
 ;
